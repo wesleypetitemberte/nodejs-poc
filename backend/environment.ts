@@ -1,4 +1,4 @@
-export const environment = {
+export const environment: Record<string, string> = {
     DB_HOST: 'localhost',
     DB_USER: 'root',
     DB_PASS: 'root',
