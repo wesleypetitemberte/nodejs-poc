@@ -1,13 +1,40 @@
-# Editor configuration, see http://editorconfig.org
+# Define que este é o arquivo de configuração raiz
 root = true
 
+# Configuração padrão para todos os arquivos
 [*]
 charset = utf-8
 indent_style = space
-indent_size = 4
+indent_size = 2
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+# Configuração específica para arquivos Markdown
 [*.md]
 max_line_length = off
 trim_trailing_whitespace = false
+
+# Configuração para arquivos JSON, YAML e outros de configuração
+[*.{json,yml,yaml}]
+indent_size = 2
+
+# Configuração para arquivos JavaScript, TypeScript e Angular
+[*.{js,ts,tsx}]
+indent_size = 2
+
+# Configuração para arquivos HTML e CSS
+[*.{html,css,scss}]
+indent_size = 2
+
+# Configuração para arquivos do Node.js e Express
+[*.{js,json}]
+indent_size = 2
+
+# Configuração para arquivos de template do AngularJS
+[*.{html}]
+indent_size = 2
+
+# Configuração para arquivos de scripts Shell
+[*.sh]
+indent_style = space
+indent_size = 4

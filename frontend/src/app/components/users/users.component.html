@@ -1,7 +1,6 @@
 <section class="container mt-4">
   <h1 class="text-center mb-4">Cadastro de Usuários</h1>
 
-  <!-- Formulário -->
   <form (submit)="saveUser()" class="mb-4">
     <div class="row">
       <div class="col-12 mb-lg-0 mb-4 col-lg-4">
@@ -24,7 +23,6 @@
     </div>
   </form>
 
-  <!-- Tabela de usuários -->
   <table *ngIf="users.length > 0" class="table table-bordered">
     <thead>
       <tr>

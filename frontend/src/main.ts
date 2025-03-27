@@ -3,8 +3,7 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { provideHttpClient } from '@angular/common/http';
 
-// Adiciona `provideHttpClient()` dentro do appConfig
 bootstrapApplication(AppComponent, {
   ...appConfig,
   providers: [...(appConfig.providers), provideHttpClient()]
-}).catch((err) => console.error(err));
+})
