@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { environment } from '../../environment';
 import mysql from 'mysql2';
 import cors from 'cors';
+import { apiKeyMiddleware } from 'src/middleware/auth';
 
 const app = express();
 app.use(express.json());
@@ -14,7 +15,8 @@ const db = mysql.createConnection({
   database: environment.DB_NAME,
 });
 
-const PORT = environment.PORT;
+const PORT = environment.PORT || '3000';
+const apiURL = '/api/users';
 
 db.connect((err) => {
   if (err) {
@@ -36,7 +38,7 @@ db.query(
   }
 );
 
-app.get('/users', (req: Request, res: Response) => {
+app.get(apiURL, apiKeyMiddleware, (req: Request, res: Response) => {
   db.query('SELECT * FROM users', (err, results) => {
     if (err) {
       res.status(500).json({ error: err.message });
@@ -46,7 +48,7 @@ app.get('/users', (req: Request, res: Response) => {
   });
 });
 
-app.post('/users', (req: Request, res: Response) => {
+app.post(apiURL, apiKeyMiddleware, (req: Request, res: Response) => {
   const { name, lastname, age } = req.body;
   db.query(
     'INSERT INTO users (name, lastname, age) VALUES (?, ?, ?)',
@@ -61,7 +63,7 @@ app.post('/users', (req: Request, res: Response) => {
   );
 });
 
-app.put('/users/:id', (req: Request, res: Response) => {
+app.put(apiURL + '/:id', apiKeyMiddleware, (req: Request, res: Response) => {
   const { name, lastname, age } = req.body;
   const { id } = req.params;
   db.query(
@@ -77,7 +79,7 @@ app.put('/users/:id', (req: Request, res: Response) => {
   );
 });
 
-app.delete('/users/:id', (req: Request, res: Response) => {
+app.delete(apiURL + '/:id', apiKeyMiddleware, (req: Request, res: Response) => {
   const { id } = req.params;
   db.query('DELETE FROM users WHERE id = ?', [id], (err) => {
     if (err) {
