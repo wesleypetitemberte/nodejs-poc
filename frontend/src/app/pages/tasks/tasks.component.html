@@ -1,0 +1,57 @@
+<h2 class="text-center mb-4">Cadastro de Serviços</h2>
+
+<section class="container mt-4">
+  <form (submit)="saveTask()" class="mb-4">
+    <div class="row">
+      <div class="col-12 mb-lg-0 mb-4 col-lg-2">
+        <label for="customer">Cliente</label>
+        <input type="text" [(ngModel)]="task.customer" name="customer" class="form-control" placeholder="Nome do cliente" required />
+      </div>
+      <div class="col-12 mb-lg-0 mb-4 col-lg-3">
+        <label for="name">Serviço</label>
+        <input type="text" [(ngModel)]="task.name" name="name" class="form-control" placeholder="Nome do serviço" required />
+      </div>
+      <div class="col-12 mb-lg-0 mb-4 col-lg-3">
+        <label for="description">Descrição</label>
+        <input type="text" [(ngModel)]="task.description" name="description" class="form-control" placeholder="Descrição do serviço" required />
+      </div>
+      <div class="col-12 mb-lg-0 mb-4 col-lg-2">
+        <label for="price">Valor</label>
+        <input type="number" [(ngModel)]="task.price" name="price" class="form-control" required />
+      </div>
+      <div class="col-12 col-lg-2 d-flex align-items-end">
+        <button type="submit" class="btn btn-success w-100" title="{{ editMode ? 'Atualizar' : 'Adicionar'}} serviço">
+          {{ editMode ? "Atualizar" : "Adicionar" }}
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <table *ngIf="tasks.length > 0" class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Serviço</th>
+        <th>Descrição</th>
+        <th>Valor</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>{{ task.id }}</td>
+        <td>{{ task.customer }}</td>
+        <td>{{ task.name }}</td>
+        <td>{{ task.description }}</td>
+        <td>R${{ task.price }}</td>
+        <td class="d-flex gap-2 flex-lg-row flex-column">
+          <button (click)="editTask(task)" type="button" class="btn btn-primary btn-sm" title="Editar">Editar</button>
+          <button (click)="deleteTask(task.id!)" type="button" class="btn btn-danger btn-sm" title="Excluir">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 *ngIf="tasks.length == 0 || !tasks" class="text-center">Nenhum serviço encontrado!</h4>
+</section>

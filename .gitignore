@@ -1,9 +1,11 @@
 # Node
 backend/node_modules/
+backend/environment.ts
 
 # Angular
 frontend/node_modules/
 frontend/.angular/cache/
+frontend/environment.ts
 
 # VSCode settings
 frontend/.vscode/*
